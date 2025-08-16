@@ -1,0 +1,32 @@
+{
+  "format": "custom",
+  "id": "header",
+  "label": "Header",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "Logo",
+          "constraint": {
+            "width": 185
+          },
+          "thumbnails": []
+        }
+      },
+      "nav_links": {
+        "type": "Link",
+        "config": {
+          "label": "Nav Links",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": false,
+          "allowText": true,
+          "repeat": true
+        }
+      }
+    }
+  }
+}

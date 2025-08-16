@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand: #0891b2;
+}
+
+@layer components {
+  .max-w-page {
+    @apply max-w-screen-xl mx-auto p-4;
+  }
+
+  .primary-button {
+    @apply text-white bg-brand;
+  }
+}

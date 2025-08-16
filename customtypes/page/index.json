@@ -13,6 +13,19 @@
           "placeholder": ""
         }
       },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "hero": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO & Metadata": {
       "title": {
         "type": "Text",
         "config": {
@@ -20,15 +33,6 @@
           "placeholder": ""
         }
       },
-      "slices": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {}
-        }
-      }
-    },
-    "SEO & Metadata": {
       "meta_description": {
         "type": "Text",
         "config": {

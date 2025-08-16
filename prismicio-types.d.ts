@@ -5,87 +5,118 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type PickContentRelationshipFieldData<
-  TRelationship extends
-    | prismic.CustomTypeModelFetchCustomTypeLevel1
-    | prismic.CustomTypeModelFetchCustomTypeLevel2
-    | prismic.CustomTypeModelFetchGroupLevel1
-    | prismic.CustomTypeModelFetchGroupLevel2,
-  TData extends Record<
-    string,
-    | prismic.AnyRegularField
-    | prismic.GroupField
-    | prismic.NestedGroupField
-    | prismic.SliceZone
-  >,
+  TRelationship extends prismic.CustomTypeModelFetchCustomTypeLevel1 | prismic.CustomTypeModelFetchCustomTypeLevel2 | prismic.CustomTypeModelFetchGroupLevel1 | prismic.CustomTypeModelFetchGroupLevel2,
+  TData extends Record<string, prismic.AnyRegularField | prismic.GroupField | prismic.NestedGroupField | prismic.SliceZone>,
   TLang extends string,
 > =
   // Content relationship fields
   {
-    [TSubRelationship in Extract<
-      TRelationship["fields"][number],
-      prismic.CustomTypeModelFetchContentRelationshipLevel1
-    > as TSubRelationship["id"]]: ContentRelationshipFieldWithData<
+    [TSubRelationship in Extract<TRelationship["fields"][number], prismic.CustomTypeModelFetchContentRelationshipLevel1> as TSubRelationship["id"]]: ContentRelationshipFieldWithData<
       TSubRelationship["customtypes"],
       TLang
     >;
-  } & // Group
-  {
+  } & { // Group
     [TGroup in Extract<
       TRelationship["fields"][number],
-      | prismic.CustomTypeModelFetchGroupLevel1
-      | prismic.CustomTypeModelFetchGroupLevel2
-    > as TGroup["id"]]: TData[TGroup["id"]] extends prismic.GroupField<
-      infer TGroupData
-    >
-      ? prismic.GroupField<
-          PickContentRelationshipFieldData<TGroup, TGroupData, TLang>
-        >
-      : never;
-  } & // Other fields
-  {
-    [TFieldKey in Extract<
-      TRelationship["fields"][number],
-      string
-    >]: TFieldKey extends keyof TData ? TData[TFieldKey] : never;
+      prismic.CustomTypeModelFetchGroupLevel1 | prismic.CustomTypeModelFetchGroupLevel2
+    > as TGroup["id"]]: TData[TGroup["id"]] extends prismic.GroupField<infer TGroupData> ? prismic.GroupField<PickContentRelationshipFieldData<TGroup, TGroupData, TLang>> : never;
+  } & { // Other fields
+    [TFieldKey in Extract<TRelationship["fields"][number], string>]: TFieldKey extends keyof TData ? TData[TFieldKey] : never;
   };
 
 type ContentRelationshipFieldWithData<
-  TCustomType extends
-    | readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[]
-    | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
+  TCustomType extends readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[] | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
   TLang extends string = string,
 > = {
-  [ID in Exclude<
-    TCustomType[number],
-    string
-  >["id"]]: prismic.ContentRelationshipField<
+  [ID in Exclude<TCustomType[number], string>["id"]]: prismic.ContentRelationshipField<
     ID,
     TLang,
-    PickContentRelationshipFieldData<
-      Extract<TCustomType[number], { id: ID }>,
-      Extract<prismic.Content.AllDocumentTypes, { type: ID }>["data"],
-      TLang
-    >
+    PickContentRelationshipFieldData<Extract<TCustomType[number], { id: ID }>, Extract<prismic.Content.AllDocumentTypes, { type: ID }>["data"], TLang>
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = never;
+/**
+ * Content for Footer documents
+ */
+interface FooterDocumentData {
+  /**
+   * Site Name field in *Footer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.site_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  site_name: prismic.KeyTextField;
+
+  /**
+   * Social Links field in *Footer*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.social_links
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  social_links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, never>>;
+}
+
+/**
+ * Footer document from Prismic
+ *
+ * - **API ID**: `footer`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type FooterDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<FooterDocumentData>, "footer", Lang>;
+
+/**
+ * Content for Header documents
+ */
+interface HeaderDocumentData {
+  /**
+   * Logo field in *Header*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * Nav Links field in *Header*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header.nav_links
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  nav_links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, never>>;
+}
+
+/**
+ * Header document from Prismic
+ *
+ * - **API ID**: `header`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HeaderDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<HeaderDocumentData>, "header", Lang>;
+
+type PageDocumentDataSlicesSlice = HeroSlice;
 
 /**
  * Content for Page documents
  */
 interface PageDocumentData {
-  /**
-   * Title field in *Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: page.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  title: prismic.KeyTextField;
-
   /**
    * Slice Zone field in *Page*
    *
@@ -96,6 +127,17 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/slices
    */
   slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
+   * Title field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  title: prismic.KeyTextField;
+
+  /**
    * Meta Description field in *Page*
    *
    * - **Field Type**: Text
@@ -103,7 +145,7 @@ interface PageDocumentData {
    * - **API ID Path**: page.meta_description
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
+   */
   meta_description: prismic.KeyTextField;
 }
 
@@ -116,24 +158,85 @@ interface PageDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type PageDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+export type PageDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
-export type AllDocumentTypes = PageDocument;
+export type AllDocumentTypes = FooterDocument | HeaderDocument | PageDocument;
+
+/**
+ * Primary content in *Hero → Default → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Heading field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Paragraph field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.paragraph
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  paragraph: prismic.RichTextField;
+
+  /**
+   * Link field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Image field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Hero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<"default", Simplify<HeroSliceDefaultPrimary>, never>;
+
+/**
+ * Slice variation for *Hero*
+ */
+type HeroSliceVariation = HeroSliceDefault;
+
+/**
+ * Hero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
-    (
-      repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
-    ): prismic.Client<AllDocumentTypes>;
+    (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
-    (
-      repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig,
-    ): prismic.WriteClient<AllDocumentTypes>;
+    (repositoryNameOrEndpoint: string, options: prismic.WriteClientConfig): prismic.WriteClient<AllDocumentTypes>;
   }
 
   interface CreateMigration {
@@ -142,10 +245,18 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      FooterDocument,
+      FooterDocumentData,
+      HeaderDocument,
+      HeaderDocumentData,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      HeroSlice,
+      HeroSliceDefaultPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
     };
   }
 }
