@@ -10,11 +10,11 @@ export default function Nav({ navLinks }: { navLinks: any }) {
   const [toggleNav, setToggleNav] = useState(false);
   const currentPath = usePathname();
   const activeClass = "bg-brand text-white md:text-brand md:bg-transparent";
-  const unActiveClass = "text-slate-700 hover:bg-gray-100 md:hover:text-brand";
-  const baseClass = "block py-2 px-3 rounded-sm md:p-0 md:hover:bg-transparent";
+  const unActiveClass = "text-slate-700 hover:bg-gray-100 md:hover:text-brand md:hover:bg-transparent";
+  const baseClass = "block py-2 px-4 rounded-sm md:p-0";
 
   function handleToggleNav() {
-    setToggleNav((prevToggleNav) => !prevToggleNav);
+    if (window.innerWidth < 768) setToggleNav((prevToggleNav) => !prevToggleNav);
   }
 
   return (
@@ -30,11 +30,8 @@ export default function Nav({ navLinks }: { navLinks: any }) {
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
         </svg>
       </button>
-      <nav
-        id="nav"
-        className={`${toggleNav ? "visible opacity-100 h-auto" : "invisible opacity-0 h-0"} items-center justify-between w-full duration-300 md:flex md:w-auto md:order-1 md:h-auto md:visible md:opacity-100`}
-      >
-        <ul className="flex flex-col md:p-0 mt-4 font-medium md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:bg-white">
+      <nav id="nav" className={`${toggleNav ? "visible opacity-100 h-auto" : "invisible opacity-0 h-0"} w-full md:w-auto md:visible md:opacity-100 md:h-auto`}>
+        <ul className="flex flex-col mt-4 font-semibold text-lg md:flex-row md:gap-8 md:mt-0">
           {navLinks.map((link: any) => (
             <li key={link.key}>
               <PrismicNextLink field={link} onClick={handleToggleNav} className={`${link.url === currentPath ? activeClass : unActiveClass} ${baseClass}`} />

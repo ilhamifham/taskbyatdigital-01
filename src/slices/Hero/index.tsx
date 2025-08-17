@@ -13,21 +13,15 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
   return (
-    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <div className="max-w-page py-16 text-center">
+    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className="last:pb-16">
+      <div className="max-w-section text-center">
         <PrismicRichText
           field={slice.primary.heading}
-          components={{ heading1: ({ children }) => <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">{children}</h1> }}
+          components={{ heading1: ({ children }) => <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight mx-auto max-w-xl md:text-5xl xl:text-6xl xl:max-w-none">{children}</h1> }}
         />
-        <PrismicRichText
-          field={slice.primary.paragraph}
-          components={{ paragraph: ({ children }) => <p className="mb-6 text-lg font-normal text-gray-700 max-w-xl mx-auto lg:text-xl">{children}</p> }}
-        />
-        <PrismicNextLink
-          field={slice.primary.link}
-          className="primary-button inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center rounded-full mb-8 md:mb-12 lg:mb-16"
-        />
-        <PrismicNextImage field={slice.primary.image} className="w-full mx-auto max-w-md md:max-w-3xl xl:max-w-4xl" priority />
+        <PrismicRichText field={slice.primary.paragraph} components={{ paragraph: ({ children }) => <p className="mb-5 text-lg text-gray-700 max-w-xl mx-auto xl:text-xl xl:mb-6">{children}</p> }} />
+        <PrismicNextLink field={slice.primary.link} className="primary-button mb-12" />
+        <PrismicNextImage field={slice.primary.image} className="w-full mx-auto max-w-[64.375rem]" priority />
       </div>
     </section>
   );
