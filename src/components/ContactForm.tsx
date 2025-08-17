@@ -1,7 +1,7 @@
 "use client";
 
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type FormData = { fullname: string; email: string; message: string };
 
@@ -38,18 +38,19 @@ export default function ContactForm() {
       resetForm();
       setSubmitting(false);
       setSubmitted(true);
+      console.log(values);
     }, 3000);
   }
 
-  function handleSubmitted() {
+  useEffect(() => {
     if (isSubmitted) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setSubmitted(false);
       }, 3000);
-    }
-  }
 
-  handleSubmitted();
+      return () => clearTimeout(timer);
+    }
+  }, [isSubmitted]);
 
   return (
     <Formik initialValues={formData} validate={handleValidations} onSubmit={handleSubmit}>
@@ -78,7 +79,7 @@ export default function ContactForm() {
               <Field id="message" component="textarea" name="message" className="form-input resize-none h-40" placeholder="Write your message here..." />
               <ErrorMessage name="message" component="div" className="text-red-500 mt-1" />
             </div>
-            <button className="primary-button w-full" disabled={isSubmitting}>
+            <button type="submit" className="primary-button w-full" disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </Form>
