@@ -1,84 +1,84 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"heading": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading1",
-						"content": {
-							"text": "Describe"
-						}
-					}
-				]
-			},
-			"cards": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"image",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
-										"width": 4000,
-										"height": 4000
-									},
-									"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
-									"width": 4000,
-									"height": 4000,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"alt": "hello",
-									"credits": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
-								"heading",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "heading2",
-											"content": {
-												"text": "Never"
-											}
-										}
-									]
-								}
-							],
-							[
-								"paragraph",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Nulla magna aute excepteur nulla eu nulla tempor minim. Ipsum in quis veniam et amet minim. Reprehenderit nisi sunt quis dolore amet eiusmod proident mollit minim non quis laboris duis enim."
-											}
-										}
-									]
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": []
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading1",
+            "content": {
+              "text": "Describe"
+            }
+          }
+        ]
+      },
+      "cards": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "image",
+                {
+                  "origin": {
+                    "id": "main",
+                    "url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
+                    "width": 4000,
+                    "height": 4000
+                  },
+                  "url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
+                  "width": 4000,
+                  "height": 4000,
+                  "edit": {
+                    "zoom": 1,
+                    "crop": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "background": "transparent"
+                  },
+                  "alt": "hello",
+                  "credits": null,
+                  "__TYPE__": "ImageContent",
+                  "thumbnails": {}
+                }
+              ],
+              [
+                "heading",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "heading2",
+                      "content": {
+                        "text": "Never"
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "paragraph",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "paragraph",
+                      "content": {
+                        "text": "Nulla magna aute excepteur nulla eu nulla tempor minim. Ipsum in quis veniam et amet minim. Reprehenderit nisi sunt quis dolore amet eiusmod proident mollit minim non quis laboris duis enim."
+                      }
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "items": []
+  }
 ]

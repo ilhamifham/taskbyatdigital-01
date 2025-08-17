@@ -9,6 +9,10 @@
 }
 
 @layer base {
+  *:focus-visible {
+    outline-offset: 2px;
+  }
+
   body {
     color: var(--color-gray-700);
   }
@@ -25,7 +29,7 @@
   }
 
   .primary-button {
-    @apply text-white bg-brand text-sm rounded-sm inline-flex items-center justify-center px-5 py-3 font-bold text-center hover:text-brand hover:bg-hover;
+    @apply bg-brand text-white text-sm rounded-lg inline-flex items-center justify-center px-5 py-3 font-bold text-center cursor-pointer hover:text-brand hover:bg-hover disabled:cursor-auto disabled:opacity-50 disabled:hover:bg-brand disabled:hover:text-white;
   }
 
   .heading1,
@@ -48,5 +52,13 @@
 
   .paragraph1 {
     @apply text-lg xl:text-xl;
+  }
+
+  .form-label {
+    @apply block text-lg mb-2 font-semibold;
+  }
+
+  .form-input {
+    @apply bg-white border border-hover rounded-lg block w-full p-2.5 placeholder:text-gray-400;
   }
 }

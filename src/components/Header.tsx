@@ -10,7 +10,7 @@ export default async function Header() {
   const header = await client.getSingle("header");
 
   return (
-    <header className="bg-white sticky w-full z-20 top-0">
+    <header className="bg-white sticky w-full z-20 top-0 border-b border-b-hover">
       <div className="max-w-header flex flex-wrap items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
           <PrismicNextImage field={header.data.logo} className="w-46.25" />
