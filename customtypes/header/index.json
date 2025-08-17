@@ -11,7 +11,7 @@
         "config": {
           "label": "Logo",
           "constraint": {
-            "width": 185
+            "width": ""
           },
           "thumbnails": []
         }

@@ -27,7 +27,7 @@
             "label": "Paragraph",
             "placeholder": "",
             "allowTargetBlank": false,
-            "single": "paragraph"
+            "single": "paragraph,heading6"
           }
         },
         "image": {

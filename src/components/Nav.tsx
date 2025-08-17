@@ -10,7 +10,7 @@ export default function Nav({ navLinks }: { navLinks: any }) {
   const [toggleNav, setToggleNav] = useState(false);
   const currentPath = usePathname();
   const activeClass = "bg-brand text-white md:text-brand md:bg-transparent";
-  const unActiveClass = "text-slate-700 hover:bg-gray-100 md:hover:text-brand md:hover:bg-transparent";
+  const unActiveClass = "text-slate-700 hover:bg-hover md:hover:text-brand md:hover:bg-transparent";
   const baseClass = "block py-2 px-4 rounded-sm md:p-0";
 
   function handleToggleNav() {
@@ -20,7 +20,7 @@ export default function Nav({ navLinks }: { navLinks: any }) {
   return (
     <>
       <button
-        className="inline-flex items-center w-8 h-8 justify-center text-sm text-brand rounded-sm cursor-pointer md:hidden hover:bg-gray-100"
+        className="inline-flex items-center w-8 h-8 justify-center text-sm text-brand rounded-sm cursor-pointer md:hidden hover:bg-hover"
         aria-controls="nav"
         aria-expanded={toggleNav}
         onClick={handleToggleNav}

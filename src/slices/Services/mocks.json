@@ -23,7 +23,6 @@
 							[
 								"image",
 								{
-									"__TYPE__": "ImageContent",
 									"origin": {
 										"id": "main",
 										"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
@@ -42,6 +41,8 @@
 										"background": "transparent"
 									},
 									"alt": "hello",
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
 							],
@@ -67,7 +68,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Magna amet laborum id exercitation duis esse non sunt officia adipisicing."
+												"text": "Nulla magna aute excepteur nulla eu nulla tempor minim. Ipsum in quis veniam et amet minim. Reprehenderit nisi sunt quis dolore amet eiusmod proident mollit minim non quis laboris duis enim."
 											}
 										}
 									]

@@ -18,22 +18,28 @@ const Services: FC<ServicesProps> = ({ slice }) => {
         <PrismicRichText
           field={slice.primary.heading}
           components={{
-            heading1: ({ children }) => <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-tight text-center md:text-5xl xl:text-6xl">{children}</h1>,
-            heading2: ({ children }) => <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight text-center md:text-4xl xl:text-5xl">{children}</h2>,
+            heading1: ({ children }) => <h1 className="heading1 mb-8 text-center">{children}</h1>,
+            heading2: ({ children }) => <h2 className="heading2 mb-8 text-center">{children}</h2>,
           }}
         />
-        <ul className="flex flex-wrap justify-center gap-4">
+        <ul className="flex flex-wrap justify-center gap-4 md:gap-8">
           {slice.primary.cards.map((card, index) => (
-            <li key={index} className="bg-[#F5F9FF] p-4 rounded-lg max-w-[360px] xl:max-w-[300px]">
+            <li key={index} className="bg-brand-light p-4 rounded-lg max-w-[22rem] xl:max-w-[24.625rem]">
               <PrismicNextImage field={card.image} className="mb-4 w-16" />
               <PrismicRichText
                 field={card.heading}
                 components={{
-                  heading2: ({ children }) => <h2 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">{children}</h2>,
-                  heading3: ({ children }) => <h3 className="mb-4 text-2xl font-extrabold leading-none tracking-tight">{children}</h3>,
+                  heading2: ({ children }) => <h2 className="heading3 mb-3">{children}</h2>,
+                  heading3: ({ children }) => <h3 className="heading3 mb-3">{children}</h3>,
                 }}
               />
-              <PrismicRichText field={card.paragraph} components={{ paragraph: ({ children }) => <p className="text-gray-700 xl:text-lg">{children}</p> }} />
+              <PrismicRichText
+                field={card.paragraph}
+                components={{
+                  heading6: ({ children }) => <p className="paragraph1">{children}</p>,
+                  paragraph: ({ children }) => <p className="xl:text-lg">{children}</p>,
+                }}
+              />
             </li>
           ))}
         </ul>

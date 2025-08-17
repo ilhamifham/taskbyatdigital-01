@@ -3,7 +3,15 @@
 
 @theme {
   --color-brand: #0891b2;
+  --color-brand-light: #f5f9ff;
+  --color-hover: #f3f4f6;
   --font-sans: "Nunito";
+}
+
+@layer base {
+  body {
+    color: var(--color-gray-700);
+  }
 }
 
 @layer components {
@@ -17,6 +25,28 @@
   }
 
   .primary-button {
-    @apply text-white bg-brand text-sm rounded-sm inline-flex items-center justify-center px-5 py-3 font-bold text-center hover:text-brand hover:bg-gray-100;
+    @apply text-white bg-brand text-sm rounded-sm inline-flex items-center justify-center px-5 py-3 font-bold text-center hover:text-brand hover:bg-hover;
+  }
+
+  .heading1,
+  .heading2,
+  .heading3 {
+    @apply font-extrabold leading-none tracking-tight text-slate-700;
+  }
+
+  .heading1 {
+    @apply text-4xl md:text-5xl xl:text-6xl;
+  }
+
+  .heading2 {
+    @apply text-3xl md:text-4xl xl:text-5xl;
+  }
+
+  .heading3 {
+    @apply text-2xl;
+  }
+
+  .paragraph1 {
+    @apply text-lg xl:text-xl;
   }
 }

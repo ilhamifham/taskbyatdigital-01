@@ -13,7 +13,7 @@ export default async function Header() {
     <header className="bg-white sticky w-full z-20 top-0">
       <div className="max-w-header flex flex-wrap items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
-          <PrismicNextImage field={header.data.logo} priority />
+          <PrismicNextImage field={header.data.logo} className="w-46.25" />
         </Link>
         <Nav navLinks={header.data.nav_links} />
       </div>
