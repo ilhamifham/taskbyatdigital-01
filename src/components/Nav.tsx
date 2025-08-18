@@ -4,10 +4,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 
-import { PrismicNextLink } from "@prismicio/next";
-import { LinkField, asLink } from "@prismicio/client";
+type navLink = {
+  key: string;
+  url: any;
+  text: string | undefined;
+};
 
-export default function Nav({ navLinks }: { navLinks: LinkField[] }) {
+export default function Nav({ navLinks }: { navLinks: navLink[] }) {
   const [toggleNav, setToggleNav] = useState(false);
   const currentPath = usePathname();
   const activeClass = "bg-brand text-white md:text-brand md:bg-transparent";
@@ -33,9 +36,11 @@ export default function Nav({ navLinks }: { navLinks: LinkField[] }) {
       </button>
       <nav id="nav" className={`${toggleNav ? "visible opacity-100 h-auto" : "invisible opacity-0 h-0"} w-full md:w-auto md:visible md:opacity-100 md:h-auto`}>
         <ul className="flex flex-col mt-4 font-semibold text-lg md:flex-row md:gap-8 md:mt-0">
-          {navLinks.map((link, index) => (
-            <li key={index}>
-              <PrismicNextLink field={link} className={`${asLink(link) === currentPath ? activeClass : unActiveClass} ${baseClass}`} onClick={handleToggleNav} />
+          {navLinks.map((link) => (
+            <li key={link.key}>
+              <Link href={link.url} className={`${link.url === currentPath ? activeClass : unActiveClass} ${baseClass}`} onClick={handleToggleNav}>
+                {link.text}
+              </Link>
             </li>
           ))}
           <li>
