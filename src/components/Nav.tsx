@@ -33,15 +33,11 @@ export default function Nav({ navLinks }: { navLinks: LinkField[] }) {
       </button>
       <nav id="nav" className={`${toggleNav ? "visible opacity-100 h-auto" : "invisible opacity-0 h-0"} w-full md:w-auto md:visible md:opacity-100 md:h-auto`}>
         <ul className="flex flex-col mt-4 font-semibold text-lg md:flex-row md:gap-8 md:mt-0">
-          {navLinks.map((link, index) => {
-            const url = asLink(link) || "/";
-
-            return (
-              <li key={index}>
-                <PrismicNextLink field={link} className={`${url === currentPath ? activeClass : unActiveClass} ${baseClass}`} onClick={handleToggleNav} />
-              </li>
-            );
-          })}
+          {navLinks.map((link, index) => (
+            <li key={index}>
+              <PrismicNextLink field={link} className={`${asLink(link) === currentPath ? activeClass : unActiveClass} ${baseClass}`} onClick={handleToggleNav} />
+            </li>
+          ))}
           <li>
             <Link href="contact" className={`${"/contact" === currentPath ? activeClass : unActiveClass} ${baseClass}`} onClick={handleToggleNav}>
               Contact
