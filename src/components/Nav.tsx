@@ -34,7 +34,7 @@ export default function Nav({ navLinks }: { navLinks: LinkField[] }) {
       <nav id="nav" className={`${toggleNav ? "visible opacity-100 h-auto" : "invisible opacity-0 h-0"} w-full md:w-auto md:visible md:opacity-100 md:h-auto`}>
         <ul className="flex flex-col mt-4 font-semibold text-lg md:flex-row md:gap-8 md:mt-0">
           {navLinks.map((link, index) => {
-            const url = asLink(link);
+            const url = asLink(link) || "/";
 
             return (
               <li key={index}>
