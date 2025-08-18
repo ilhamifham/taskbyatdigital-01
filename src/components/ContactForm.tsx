@@ -1,7 +1,9 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import { Formik, Form, FormikHelpers } from "formik";
 import { useState, useEffect } from "react";
+
+import InputField from "./InputField";
 
 type FormData = { fullname: string; email: string; message: string };
 
@@ -39,7 +41,7 @@ export default function ContactForm() {
       setSubmitting(false);
       setSubmitted(true);
       console.log(values);
-    }, 3000);
+    }, 2000);
   }
 
   useEffect(() => {
@@ -58,27 +60,9 @@ export default function ContactForm() {
         <>
           {isSubmitted ? <div className="max-w-md mx-auto text-center w-full p-4 mb-4 text-sm text-green-800 rounded-3xl bg-green-50 border border-green-300">Form submitted successfully</div> : null}
           <Form className="bg-brand-light p-4 rounded-3xl border border-hover max-w-md mx-auto">
-            <div className="mb-5">
-              <label htmlFor="fullname" className="form-label">
-                Full Name
-              </label>
-              <Field id="fullname" type="text" name="fullname" className="form-input capitalize" placeholder="John Doe" />
-              <ErrorMessage name="fullname" component="div" className="text-red-500 mt-1" />
-            </div>
-            <div className="mb-5">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <Field id="email" type="email" name="email" className="form-input lowercase" placeholder="example@email.com" />
-              <ErrorMessage name="email" component="div" className="text-red-500 mt-1" />
-            </div>
-            <div className="mb-5">
-              <label htmlFor="message" className="form-label">
-                Message
-              </label>
-              <Field id="message" component="textarea" name="message" className="form-input resize-none h-40" placeholder="Write your message here..." />
-              <ErrorMessage name="message" component="div" className="text-red-500 mt-1" />
-            </div>
+            <InputField label="Full Name" type="text" placeholder="John Doe" className="capitalize" />
+            <InputField label="Email" type="email" placeholder="example@email.com" className="lowercase" />
+            <InputField label="Message" component="textarea" placeholder="Write your message here..." className="resize-none h-40" />
             <button type="submit" className="primary-button w-full" disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>

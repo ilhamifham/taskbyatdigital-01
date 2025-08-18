@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #0891b2;
+  --color-brand: #0c7c97;
   --color-brand-light: #f5f9ff;
   --color-hover: #f3f4f6;
   --font-sans: "Nunito";
@@ -55,10 +55,14 @@
   }
 
   .form-label {
-    @apply block text-lg mb-2 font-semibold;
+    @apply block text-lg mb-1 font-semibold;
   }
 
   .form-input {
     @apply bg-white border border-hover rounded-lg block w-full p-2.5 placeholder:text-gray-400;
+  }
+
+  .error-message {
+    @apply text-red-500 mt-1;
   }
 }
